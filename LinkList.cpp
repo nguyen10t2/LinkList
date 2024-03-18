@@ -37,6 +37,7 @@ void insert(struct Node** head,int data,int index){
     //local tim vi tri truoc o can chen
     while(--index){
         local = local->next;
+        if(index != 0 && local->next == NULL) break;
     }
     struct Node* newNode = create(data);
     newNode->next = local->next;
@@ -102,7 +103,7 @@ int main(){
     push_back(&head, 3);  //3->null
     push_back(&head, 7);  //3->5->null
     push_front(&head,5);  //5->3->5->null
-    insert(&head, 6, 2);  //5->3->6->5->null
+    insert(&head, 6, 4);  //5->3->6->5->null
     del(&head, 1);        //5->6->5->null
     pop_back(&head);      //5->6->null
     pop_front(&head);     //6->null
