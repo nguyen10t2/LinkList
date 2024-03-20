@@ -33,6 +33,7 @@ void insert(struct Node** head,int data,int index){
     }
     if(index == 0){
         push_front(head, data);
+        return;
     }
     struct Node* local = *head;
     //local tim vi tri truoc o can chen
