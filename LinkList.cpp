@@ -15,10 +15,11 @@ void push_back(struct Node** head,int data){
         *head = create(data);
         return;
     }
-    while((*head)->next != NULL){
-        *head = (*head)->next;
+    struct Node* temp = *head;
+    while(temp->next != NULL){
+        temp = temp->next;
     }
-    (*head)->next = create(data);
+    temp->next = create(data);
 }
 void push_front(struct Node** head,int data){
     struct Node* newNode = create(data);
@@ -96,16 +97,33 @@ void call(struct Node* head){
         std::cout<<head->data<<"->";
         head = head->next;
     }
-    std::cout<<"NULL";
+    std::cout<<"NULL\n";
+}
+void call_bot(struct Node* head){
+    if(head == NULL) return;
+    call_bot(head->next);
+    std::cout<<head->data;
+}
+int countKeys(struct Node* head, int k) {
+    int count = 0;
+    struct Node* current = head;
+    while (current != NULL) {
+        if (current->data == k) {
+            count++;
+        }
+        current = current->next;
+    }
+    return count;
 }
 int main(){
     struct Node* head = NULL;
     push_back(&head, 3);  //3->null
-    push_back(&head, 7);  //3->5->null
+    push_back(&head, 5);  //3->5->null
     push_front(&head,5);  //5->3->5->null
     insert(&head, 6, 2);  //5->3->6->5->null
     del(&head, 1);        //5->6->5->null
     pop_back(&head);      //5->6->null
     pop_front(&head);     //6->null
     call(head);
+    std::cout<<countKeys(head, 5);//0
 }
